@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package lms;
 
 import java.awt.GridLayout;
@@ -14,10 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- *
- * @author pc
- */
+
 public class LMS extends JFrame{
 
         public LMS(){
@@ -135,10 +129,63 @@ public class LMS extends JFrame{
             formPanel.setLayout(new GridLayout(5,2));
             
             JLabel titlelabel = new JLabel("Title");
-            JTextField textField = new JTextField();
+            JTextField titleField = new JTextField();
             
             JLabel authorlabel = new JLabel("Author:");
             JTextField authorField = new JTextField();
+            
+            JLabel yearlabel = new JLabel("Year: ");
+            JTextField yearField = new JTextField();
+            
+            JLabel isbnlabel = new JLabel("ISBN: ");
+            JTextField isbnField = new JTextField();
+            
+            JButton submitBtn = new JButton("Submit");
+            
+            formPanel.add(titlelabel);
+            formPanel.add(titleField);
+            
+            formPanel.add(yearlabel);
+            formPanel.add(yearField);
+            
+            formPanel.add(authorlabel);
+            formPanel.add(authorField);
+            
+            
+            formPanel.add(isbnlabel);
+            formPanel.add(isbnField);
+            
+            formPanel.add(submitBtn);
+            
+            submitBtn.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    try {
+                        String title = titleField.getText();
+                        String author = authorField.getText();
+                        int year = Integer.parseInt(yearField.getText());
+                        String isbn = isbnField.getText();
+                        
+                     // we cannot do isEmpty() on integers as it is only valid for strings
+                        if(title.isEmpty() || author.isEmpty() || isbn.isEmpty()){
+                            throw new IllegalArgumentException("All Fields must be filled.");
+                        }
+                        
+                        JOptionPane.showMessageDialog(null, "Book Added Successfully");
+                        
+                    }
+                    catch(NumberFormatException nfe){
+                        JOptionPane.showMessageDialog(null, "Invalid year! Please enter a valid number.");
+                    }
+                    catch(IllegalArgumentException iae){
+                        JOptionPane.showMessageDialog(null, iae.getMessage());
+                    }
+                }
+                
+            });
+            
+            addBookFrame.add(formPanel);
+            addBookFrame.setVisible(true);
         }
         
     
