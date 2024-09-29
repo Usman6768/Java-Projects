@@ -96,7 +96,7 @@ public class LMS extends JFrame{
             updateBooksBtn.addActionListener(new ActionListener() {
                @Override
                public void actionPerformed(ActionEvent e){
-                   JOptionPane.showMessageDialog(null, "Update Book clicked");
+                   updateBookForm();
                }
             });
             
@@ -188,7 +188,63 @@ public class LMS extends JFrame{
             addBookFrame.setVisible(true);
         }
         
-    
+        private void updateBookForm(){
+            JFrame updateBookFrame = new JFrame("Update Book");
+            updateBookFrame.setSize(400,300);
+            updateBookFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            
+            JPanel updateFormPanel = new JPanel();
+            updateFormPanel.setLayout(new GridLayout(5,2));
+            
+            JLabel isbnLabel = new JLabel("Enter isbn of Book to update : ");
+            JTextField isbnField = new JTextField();
+            
+            JLabel titleLabel = new JLabel("Enter new Title : ");
+            JTextField titleField = new JTextField();
+            
+            JLabel authorLabel = new JLabel("Enter new Author : ");
+            JTextField authorField = new JTextField();
+            
+            JLabel yearLabel = new JLabel("Enter new Year : ");
+            JTextField yearField = new JTextField();
+            
+            JButton submitBtn = new JButton("Update Book");
+            
+           
+            updateFormPanel.add(isbnLabel);
+            updateFormPanel.add(isbnField);
+
+            updateFormPanel.add(titleLabel);
+            updateFormPanel.add(titleField);
+
+            updateFormPanel.add(authorLabel);
+            updateFormPanel.add(authorField);
+
+            updateFormPanel.add(yearLabel);
+            updateFormPanel.add(yearField);
+            
+            updateFormPanel.add(new JLabel());
+            updateFormPanel.add(submitBtn);
+            
+            submitBtn.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    try{
+                        String isbn = isbnField.getText();
+                        String title  = titleField.getText();
+                        String author = authorField.getText();
+                        int year = Integer.parseInt(yearField.getText());
+                        
+                        if(isbn.isEmpty()){
+                            throw new IllegalArgumentException("ISBN is required.");
+                        }
+                    }
+                }
+            });
+            
+            
+            
+        }
     public static void main(String[] args){
         // TODO code application logic here
         LMS lmss = new LMS();
