@@ -27,3 +27,8 @@ Book Name : book06
 Author Name : book06author
 Book Status : Not Available
 -----------------------
+Book ID : 12
+Book Name : 234
+Author Name : 
+Book Status : 
+-----------------------

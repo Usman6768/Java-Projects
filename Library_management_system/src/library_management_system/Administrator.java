@@ -23,8 +23,7 @@ public class Administrator extends Library_management_system {
                 System.out.println("3. Remove Book");
                 System.out.println("4. View Books");
                 System.out.println("5. Check Books availabilty");
-                System.out.println("6. Issue Book");
-                System.out.println("7. Logout");
+                System.out.println("6. Logout");
                 System.out.print("Enter Your choice : ");
                 
                 
@@ -50,9 +49,8 @@ public class Administrator extends Library_management_system {
                         checkBooksAvailability();
                         break;
                     case 6:
+                        logout();
                         break;
-                    case 7:
-                        return;
                     default:
                         System.out.println("Invalid Choice! Please Try Again.");
                 } 
@@ -274,10 +272,9 @@ public class Administrator extends Library_management_system {
                 System.out.println("-----------------------");
                 break;
             }
-            else{
-                System.out.println("Book not found");
-            }
+            
         }
+            
         }
         catch(FileNotFoundException e){
             System.out.println("An error occured : " + e.getMessage());
@@ -286,7 +283,24 @@ public class Administrator extends Library_management_system {
             System.out.println("Sorry, Book not Found.");
         }
 }
-}
+    
+    public static void logout(){
+        System.out.print("Logging out");
+        
+        try{
+            for(int i = 0; i < 4; i++ ){
+                Thread.sleep(400);
+                System.out.print(".");
+            }
+            System.out.println("");
+            System.out.println("Successfully Logged out.");
+        }
+        catch(InterruptedException e){
+            System.out.println("An error occuring while logging out.");
+        }
+    }
+    }
+
     
    
     

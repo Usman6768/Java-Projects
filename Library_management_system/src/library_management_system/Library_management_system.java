@@ -432,10 +432,35 @@ import java.util.Scanner;
             }
                 
             if(role.equals("Administrator") && password.equals(adminPassword)){
+                System.out.print("Logging In");
+        
+            try{
+                for(int i = 0; i < 4; i++ ){
+                Thread.sleep(400);
+                System.out.print(".");
+            }
+                System.out.println("");
+                System.out.println("Logged in Successfully.");
+            }
+            catch(InterruptedException e){
+                System.out.println("An error occuring while logging in.");
+            }
                 Administrator.AdminMenu();
                 return;
             }
             else if(role.equals("User") && password.equals((userPassword))){
+                 System.out.print("Logging In");
+        
+            try{
+                for(int i = 0; i < 4; i++ ){
+                Thread.sleep(400);
+                System.out.print(".");
+            }
+                System.out.println("Logged in Successfully.");
+            }
+            catch(InterruptedException e){
+                System.out.println("An error occuring while logging in.");
+            }
                 User.UserMenu();
                 return;
             }
