@@ -1,34 +1,20 @@
-Book ID : 1
-Book Name: jannat kay pattay
-
-Author Name: nimra ahmed
------------------------
-Book ID : 02
-Book Name: rahat
-Author Name: zaheer khan
------------------------
-Book ID : 03
-Book Name : book3
-Author Name : book3author
-Book Status : true
------------------------
-Book ID : 04
-Book Name : newName4
-Author Name : newAuthor4
-Book Status : notAvailable
-----------------------------------------
-Book ID : 05
-Book Name : book05
-Author Name : book5author
+Book ID : 01
+Book Name : book1
+Author Name : book1author
 Book Status : Available
 -----------------------
-Book ID : 06
-Book Name : book06
-Author Name : book06author
+Book ID : 02
+Book Name : book02
+Author Name : book2author
 Book Status : Not Available
 -----------------------
-Book ID : 12
-Book Name : 234
-Author Name : 
-Book Status : 
+Book ID : 03
+Book Name : book03
+Author Name : book3author
+Book Status : Not Available
+-----------------------
+Book ID : 04
+Book Name : book4
+Author Name : book4author
+Book Status : Available
 -----------------------

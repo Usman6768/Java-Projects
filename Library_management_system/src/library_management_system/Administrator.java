@@ -61,8 +61,6 @@ public class Administrator extends Library_management_system {
                 }
             }
             }
-            
-    
     
     public static void addBook(){
         
@@ -241,49 +239,44 @@ public class Administrator extends Library_management_system {
         }
     }
     
-    public static void checkBooksAvailability(){
-        File file = new File("Books.txt");
-        System.out.print("Enter the ID or name of the book to check its availabilty : ");
-        String searchBook = s.nextLine();
-        
-        boolean bookFound = false;
-        
-        try(Scanner sc = new Scanner(file)){
-            while(sc.hasNextLine()){
+    public static void checkBooksAvailability() {
+    File file = new File("Books.txt");
+    System.out.print("Enter the ID or name of the book to check its availability: ");
+    String searchBook = s.nextLine().toLowerCase(); 
+    
+    boolean bookFound = false;
+    
+    try (Scanner sc = new Scanner(file)) {
+        while (sc.hasNextLine()) {
             String line = sc.nextLine();
             
-            if((line.contains("Book ID : " + searchBook) || line.contains("Book Name : " + searchBook)) && line.contains("Book Status : Available")){
+            if (line.contains("Book ID : " + searchBook) || line.contains("Book Name : " + searchBook)) {
                 bookFound = true;
-                System.out.println("Book Found");
-                System.out.println(line);
+                System.out.println("\nBook Found:");
+                System.out.println(line); 
                 System.out.println(sc.nextLine());
                 System.out.println(sc.nextLine());
-                System.out.println("Book is Available.");
+                String available = sc.nextLine();
+                
+                if (available.contains("Not Available")) {
+                    System.out.println("Book is Not Available.");
+                }
+                else if(available.contains("Available")){
+                    System.out.println("Book is Available.");
+                }
                 System.out.println("-----------------------");
                 break;
             }
-            else if((line.contains("Book ID : " + searchBook) || line.contains("Book Name : " + searchBook)) && line.contains("Book Status : Not Available")){
-                bookFound = true;
-                System.out.println("Book Found");
-                System.out.println(line);
-                System.out.println(sc.nextLine());
-                System.out.println(sc.nextLine());
-                System.out.println("Book is Not Available.");
-                System.out.println("-----------------------");
-                break;
-            }
-            
         }
-            
-        }
-        catch(FileNotFoundException e){
-            System.out.println("An error occured : " + e.getMessage());
-        }
-        if(!bookFound){
-            System.out.println("Sorry, Book not Found.");
-        }
-}
+    } catch (FileNotFoundException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+    }
     
+    if (!bookFound) {
+        System.out.println("Sorry, book not found.");
+    }
+}
+
     public static void logout(){
         System.out.print("Logging out");
         
@@ -294,6 +287,7 @@ public class Administrator extends Library_management_system {
             }
             System.out.println("");
             System.out.println("Successfully Logged out.");
+            MainMenu();
         }
         catch(InterruptedException e){
             System.out.println("An error occuring while logging out.");
