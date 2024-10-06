@@ -74,7 +74,7 @@ public class Administrator extends Library_management_system {
         System.out.print("Enter author of Book: ");
         String author = s.nextLine();
         
-        System.out.print("Enter author of Book: ");
+        System.out.print("Enter status of Book: ");
         String isAvailable = s.nextLine();
         
         saveBook(id, name, author, isAvailable); 
