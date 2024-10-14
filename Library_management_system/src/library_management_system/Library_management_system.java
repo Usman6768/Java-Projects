@@ -26,7 +26,7 @@ import java.util.Scanner;
             
             try{
             int choice = s.nextInt();
-            s.nextLine(); // for new line
+            s.nextLine(); 
             
             
             switch(choice){
