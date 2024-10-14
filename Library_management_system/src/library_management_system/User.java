@@ -94,7 +94,7 @@ public class User extends Library_management_system {
         
         public static void borrowBook() {
         File file = new File("Books.txt");
-        System.out.print("Enter the ID or name of the book you want to borrow: ");
+        System.out.print("Enter the ID of the book you want to borrow: ");
         String search = s.nextLine().toLowerCase();
 
         boolean bookFound = false;
