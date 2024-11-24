@@ -30,7 +30,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         manageBooks_btn = new javax.swing.JButton();
         manageUsers_btn = new javax.swing.JButton();
         logout_btn = new javax.swing.JButton();
-        manageUsers_btn1 = new javax.swing.JButton();
+        borrow_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusable(false);
@@ -78,12 +78,12 @@ public class Admin_Dashboard extends javax.swing.JFrame {
             }
         });
 
-        manageUsers_btn1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        manageUsers_btn1.setText("Borrow Requests");
-        manageUsers_btn1.setFocusable(false);
-        manageUsers_btn1.addActionListener(new java.awt.event.ActionListener() {
+        borrow_btn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        borrow_btn.setText("Borrow Requests");
+        borrow_btn.setFocusable(false);
+        borrow_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageUsers_btn1ActionPerformed(evt);
+                borrow_btnActionPerformed(evt);
             }
         });
 
@@ -99,7 +99,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(manageUsers_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageUsers_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(borrow_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -123,7 +123,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(manageFines_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageUsers_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(borrow_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(logout_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(79, Short.MAX_VALUE))
@@ -155,9 +155,11 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_manageBooks_btnActionPerformed
 
-    private void manageUsers_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUsers_btn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageUsers_btn1ActionPerformed
+    private void borrow_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrow_btnActionPerformed
+        Borrow_Req borrowReq = new Borrow_Req();
+        borrowReq.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_borrow_btnActionPerformed
 
     
     public static void main(String args[]) {
@@ -193,11 +195,11 @@ public class Admin_Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton borrow_btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logout_btn;
     private javax.swing.JButton manageBooks_btn;
     private javax.swing.JButton manageFines_btn;
     private javax.swing.JButton manageUsers_btn;
-    private javax.swing.JButton manageUsers_btn1;
     // End of variables declaration//GEN-END:variables
 }

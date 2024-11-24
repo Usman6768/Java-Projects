@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package librarymanagementsystem.userDashboard_Folder;
 
 import java.sql.Connection;
@@ -10,16 +7,14 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import librarymanagementsystem.Db_conn;
+import javax.swing.JOptionPane;
+import java.sql.*;
+import librarymanagementsystem.Session;
 
-/**
- *
- * @author pc
- */
+
 public class Borrow_Book extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Borrow_Book
-     */
+   
     public Borrow_Book() {
         initComponents();
     }
@@ -75,7 +70,15 @@ public class Borrow_Book extends javax.swing.JFrame {
             new String [] {
                 "Book ID", "Name", "ISBN", "Author", "Status"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(record_table);
 
         request_btn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -168,7 +171,7 @@ public class Borrow_Book extends javax.swing.JFrame {
             
             while(result.next()) {
             Object[] row = {
-                result.getInt("bookID"),
+                result.getString("bookID"),
                 result.getString("bookName"),
                 result.getString("isbn"),
                 result.getString("author"),
@@ -190,9 +193,82 @@ public class Borrow_Book extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_search_btnActionPerformed
+    
+    private String getSelectedBookID() {
+     int selectedRow = record_table.getSelectedRow(); 
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "No book selected. Please select a book!");
+        return null;
+    }
+    DefaultTableModel model = (DefaultTableModel) record_table.getModel();
+    Object bookID = model.getValueAt(selectedRow, 0);
+    if (bookID != null) {
+        return (String) bookID;  
+    }
+    return null;
+}
 
     private void request_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_request_btnActionPerformed
+    String userID = Session.loggedInUserID; 
+    String username = Session.loggedInUsername; 
+
+    if (userID == null || userID.equals("0")) {
+        JOptionPane.showMessageDialog(this, "No user is logged in!");
+        return;
+    }
+    
+    int selectedRow = record_table.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a book to borrow!");
+        return;
+    }
+
+    String bookID = getSelectedBookID();
+    String bookStatus = record_table.getValueAt(selectedRow, 4).toString();
+
+
+    if (bookStatus.equalsIgnoreCase("Unavailable")) {
+        JOptionPane.showMessageDialog(this, "This book is not available for borrowing.");
+        return;
+    }
+ 
+    try {
+        Db_conn db = new Db_conn();
+        Connection conn = db.getConnection();
+
+        String userCheckQuery = "SELECT COUNT(*) FROM users WHERE UserID = ?";
+        PreparedStatement userCheckStmt = conn.prepareStatement(userCheckQuery);
+        userCheckStmt.setString(1, userID);
+        ResultSet userCheckResult = userCheckStmt.executeQuery();
+
+        if (!userCheckResult.next() || userCheckResult.getInt(1) == 0) {
+            JOptionPane.showMessageDialog(this, "User does not exist in the system.");
+            return;
+        }
+
         
+        String insertQuery = "INSERT INTO borrow_requests (userID, BookID, status) VALUES (?, ?, ?)";
+        PreparedStatement stmt = conn.prepareStatement(insertQuery);
+        stmt.setString(1, userID);
+        stmt.setString(2, bookID);
+        stmt.setString(3, "Pending");
+
+        int rows = stmt.executeUpdate();
+
+        if (rows > 0) {
+            JOptionPane.showMessageDialog(this, "Borrow request sent successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to send borrow request.");
+        }
+
+        // Close resources
+        
+        userCheckStmt.close();
+        stmt.close();
+        conn.close();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
     }//GEN-LAST:event_request_btnActionPerformed
 
   

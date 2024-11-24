@@ -159,7 +159,7 @@ public class User_Login extends javax.swing.JFrame {
             Db_conn db = new Db_conn();
             Connection conn = db.getConnection();
             
-            String query = "SELECT password FROM users WHERE username=?";
+            String query = "SELECT * FROM users WHERE Username=?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1,username);
             ResultSet result = stmt.executeQuery();
@@ -167,29 +167,37 @@ public class User_Login extends javax.swing.JFrame {
             if(result.next()){
                 String storedPassword = result.getString("password");
                 
-                if(password.equals(storedPassword)){
-                    JOptionPane.showMessageDialog(this,"Login Successful.");
+               
+                 if (password.equals(storedPassword)) {
+                try {
+                    // Debugging session assignments
+                    Session.loggedInUserID = result.getString("UserID");
+                    Session.loggedInUsername = result.getString("Username");
+
+
+
+                    JOptionPane.showMessageDialog(this, "Login Successful.");
                     userDashboard.setVisible(true);
                     this.dispose();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Session error: " + e.getMessage());
                 }
-                else{
-                    JOptionPane.showMessageDialog(this, "Invalid username or password");
-                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid username or password.");
             }
-            else{
-                JOptionPane.showMessageDialog(this, "User does not exist");
-            }
-            
-            result.close();
-            stmt.close();
-            conn.close();
-            
+        } else {
+            JOptionPane.showMessageDialog(this, "User does not exist.");
         }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(this,"Error connecting to database");
-        }
-        
-        
+
+        result.close();
+        stmt.close();
+        conn.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+    }
     }//GEN-LAST:event_submit_btnActionPerformed
 
     
